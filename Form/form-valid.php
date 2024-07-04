@@ -27,14 +27,31 @@ if (isset($_POST['submit'])) {
         $nik = $_POST['nik'];
         $dept = $_POST['dept'];
         $bagian = $_POST['bagian'];
+        $results = $connection->query("SELECT COUNT(id)as totalid FROM db_kehadiran WHERE tanggal='$tanggal'");
+        $total_data = $results->fetchArray(SQLITE3_ASSOC);
         $cek_nama = $connection->querySingle("SELECT * FROM db_kehadiran WHERE nama='$nama'AND nik='$nik' AND dept='$dept' AND bagian='$bagian' AND tanggal='$tanggal'");
         if ($cek_nama) {
-            echo "<script>alert('Data Sudah Ada')</script>";
+            $cek_nomor = $connection->querySingle("SELECT nomor_undian FROM db_kehadiran WHERE nama='$nama'AND nik='$nik' AND dept='$dept' AND bagian='$bagian' AND tanggal='$tanggal'");
+            $nomor_undian = $cek_nomor;
+            include('terimaksih.php');
         } else {
-            $query = "INSERT INTO 'db_kehadiran' ('nama','nik','dept','bagian','browser','os','device','model','tanggal') Values ('$nama','$nik','$dept','$bagian','$clientInfo','$osInfo','$device','$model','$tanggal')";
+            $noundi = $total_data['totalid'] + 1;
+            if ($noundi < 10) {
+                $nomor_undian = "DPCPTI0000" . $noundi;
+            } elseif ($noundi < 100) {
+                $nomor_undian = "DPCPTI000" . $noundi;
+            } elseif ($noundi < 1000) {
+                $nomor_undian = "DPCPTI00" . $noundi;
+            } elseif ($noundi < 10000) {
+                $nomor_undian = "DPCPTI0" . $noundi;
+            } else {
+                $nomor_undian = "CPTI" . $noundi;
+            }
+            $query = "INSERT INTO 'db_kehadiran' ('nama','nik','dept','bagian','browser','os','device','model','tanggal','nomor_undian') Values ('$nama','$nik','$dept','$bagian','$clientInfo','$osInfo','$device','$model','$tanggal','$nomor_undian')";
             $connection->exec('BEGIN');
             $connection->query($query);
             $connection->exec('COMMIT');
+            include('terimaksih.php');
         }
     }
 }
