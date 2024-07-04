@@ -16,9 +16,9 @@ $dd->parse();
 
 $clientInfo = $dd->getClient('name'); // holds information about browser, feed reader, media player, ...
 $osInfo = $dd->getOs('name');
-$device = $dd->getDeviceName('name');
-$brand = $dd->getBrandName('name');
-$model = $dd->getModel('name');
+$device = $dd->getDeviceName();
+$brand = $dd->getBrandName();
+$model = $dd->getModel();
 
 $tanggal =  date("d-m-Y");
 if (isset($_POST['submit'])) {
