@@ -34,6 +34,8 @@ if (isset($_POST['submit'])) {
             $cek_nomor = $connection->querySingle("SELECT nomor_undian FROM db_kehadiran WHERE nama='$nama'AND nik='$nik' AND dept='$dept' AND bagian='$bagian' AND tanggal='$tanggal'");
             $nomor_undian = $cek_nomor;
             include('terimaksih.php');
+            echo "<div class='text-center'><h1>Btw kamu udah daftar lho ehe</h1></div>";
+            echo "<img src='asset/anya.png' style='margin-left:47%;'>";
         } else {
             $noundi = $total_data['totalid'] + 1;
             if ($noundi < 10) {
@@ -53,5 +55,6 @@ if (isset($_POST['submit'])) {
             $connection->exec('COMMIT');
             include('terimaksih.php');
         }
+    } else {
     }
 }
