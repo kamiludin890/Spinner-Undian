@@ -33,7 +33,6 @@ if (isset($_POST['submit'])) {
         if ($cek_nama) {
             $cek_nomor = $connection->querySingle("SELECT nomor_undian FROM db_kehadiran WHERE nama='$nama'AND nik='$nik' AND dept='$dept' AND bagian='$bagian' AND tanggal='$tanggal'");
             $nomor_undian = $cek_nomor;
-            $randkarak = rand(0, strlen("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ") - 1);
             include('terimaksih.php');
             echo "<div class='text-center'><h1>Btw kamu udah daftar lho ehe</h1></div>";
             echo "<img src='asset/anya.png' style='margin-left:47%;'>";

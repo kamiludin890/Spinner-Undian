@@ -1,11 +1,12 @@
 <?php
-$connection = new SQLite3('database.sqlite', SQLITE3_OPEN_CREATE | SQLITE3_OPEN_READWRITE);
+$connection = new SQLite3('Database/database.sqlite', SQLITE3_OPEN_CREATE | SQLITE3_OPEN_READWRITE);
 $connection->enableExceptions(true);
 if ($connection) {
     echo "<script>console.log('DB Connected')</script>";
 } else {
     echo "<script>console.log('DB Not Connected')</script>";
 }
+//example to fetch data
 // $results = $connection->query('SELECT * FROM db_kehadiran');
 // while ($row = $results->fetchArray(SQLITE3_ASSOC)) {
 //     echo 'id = ' . $row['id'] . '<br>';
