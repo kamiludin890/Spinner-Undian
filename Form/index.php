@@ -32,8 +32,8 @@ require_once 'koneksi.php';
 
     </div>
     <div class="text-center">
-        <h1 style="font-size:200px;">Pemenang</h1>
-        <h1 id="undian" style="font-size:200px;">Unknow</h1>
+        <h1 style="font-size:1200%;">Pemenang</h1>
+        <h1 id="undian" style="font-size:1400%;">Unknow</h1>
     </div>
     <script>
         console.log(nama);

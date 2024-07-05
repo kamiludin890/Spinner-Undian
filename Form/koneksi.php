@@ -13,7 +13,7 @@ if ($connection) {
 //     echo 'Date of Birth = ' . $row['url'] . '<br>';
 // }
 
-//buat table
+//create table, run this to init new table of db_kehadiran
 // $connection->query('CREATE TABLE IF NOT EXISTS "db_kehadiran" (
 //     "id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
 //     "nama" VARCHAR,
@@ -24,6 +24,6 @@ if ($connection) {
 //     "device"VARCHAR,
 //     "os"VARCHAR,
 //     "model"VARCHAR,
-//     "tanggal"DATE
-
+//     "tanggal"DATE,
+//     "nomor_undian"VARCHAR
 // )');
