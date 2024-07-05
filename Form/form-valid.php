@@ -33,21 +33,22 @@ if (isset($_POST['submit'])) {
         if ($cek_nama) {
             $cek_nomor = $connection->querySingle("SELECT nomor_undian FROM db_kehadiran WHERE nama='$nama'AND nik='$nik' AND dept='$dept' AND bagian='$bagian' AND tanggal='$tanggal'");
             $nomor_undian = $cek_nomor;
+            $randkarak = rand(0, strlen("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ") - 1);
             include('terimaksih.php');
             echo "<div class='text-center'><h1>Btw kamu udah daftar lho ehe</h1></div>";
             echo "<img src='asset/anya.png' style='margin-left:47%;'>";
         } else {
             $noundi = $total_data['totalid'] + 1;
             if ($noundi < 10) {
-                $nomor_undian = "DPCPTI0000" . $noundi;
+                $nomor_undian = substr(str_shuffle("ABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 5) . "0000" . $noundi;
             } elseif ($noundi < 100) {
-                $nomor_undian = "DPCPTI000" . $noundi;
+                $nomor_undian = substr(str_shuffle("ABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 5) . "000" . $noundi;
             } elseif ($noundi < 1000) {
-                $nomor_undian = "DPCPTI00" . $noundi;
+                $nomor_undian = substr(str_shuffle("ABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 5) . "00" . $noundi;
             } elseif ($noundi < 10000) {
-                $nomor_undian = "DPCPTI0" . $noundi;
+                $nomor_undian = substr(str_shuffle("ABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 5) . "0" . $noundi;
             } else {
-                $nomor_undian = "CPTI" . $noundi;
+                $nomor_undian = substr(str_shuffle("ABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 5) + $noundi;
             }
             $query = "INSERT INTO 'db_kehadiran' ('nama','nik','dept','bagian','browser','os','device','model','tanggal','nomor_undian') Values ('$nama','$nik','$dept','$bagian','$clientInfo','$osInfo','$device','$model','$tanggal','$nomor_undian')";
             $connection->exec('BEGIN');

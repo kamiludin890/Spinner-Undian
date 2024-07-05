@@ -28,8 +28,12 @@ require_once 'koneksi.php';
     }
     echo "</script>"
     ?>
-    <div><button onclick="undian()">Undian</button>
-        <h1 id="undian">Pemenang</h1>
+    <div class="d-flex"><button class="btn btn-primary mt-3" style="font-size: 50px;margin-left:37.75%;" onclick="undian()">MULAI UNDIAN</button>
+
+    </div>
+    <div class="text-center">
+        <h1 style="font-size:200px;">Pemenang</h1>
+        <h1 id="undian" style="font-size:200px;">Unknow</h1>
     </div>
     <script>
         console.log(nama);
