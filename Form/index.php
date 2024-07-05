@@ -1,4 +1,5 @@
 <?php
+require_once 'koneksi.php';
 ?>
 
 <head>
@@ -12,5 +13,42 @@
 </head>
 
 <body>
-    <div></div>
+    <?php
+    $tanggal =  date("d-m-Y");
+    $total_data = $connection->query("SELECT COUNT(id)as totalid FROM db_kehadiran WHERE tanggal='$tanggal'");
+    $total_array = $total_data->fetchArray(SQLITE3_ASSOC);
+    $no = 0;
+    echo "<script>const nama =[];const bagian =[];const nomor_undian =[];";
+    $results = $connection->query("SELECT * FROM db_kehadiran WHERE tanggal='$tanggal'");
+    while ($row = $results->fetchArray(SQLITE3_ASSOC)) {
+        echo "nama[$no] = '$row[nama]';bagian[$no] = '$row[bagian]';nomor_undian[$no] = '$row[nomor_undian]';";
+        if ($no < $total_array['totalid']) {
+            $no++;
+        }
+    }
+    echo "</script>"
+    ?>
+    <div><button onclick="undian()">Undian</button>
+        <h1 id="undian">Pemenang</h1>
+    </div>
+    <script>
+        console.log(nama);
+        var i = 1;
+
+        function undian() {
+            setTimeout(function() {
+                let x = Math.floor((Math.random() * <?= $total_array['totalid'] ?>) + 0)
+                document.getElementById('undian').innerHTML = nomor_undian[x];
+                console.log("Nama : " + nama[x]);
+                console.log("Bagian : " + bagian[x]);
+                console.log("Nomor Undian : " + nomor_undian[x]);
+                i++;
+                if (i < 3000) {
+                    undian();
+                } else {
+                    i = 1;
+                }
+            }, 3);
+        }
+    </script>
 </body>
