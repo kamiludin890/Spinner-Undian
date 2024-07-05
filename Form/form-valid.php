@@ -55,6 +55,7 @@ if (isset($_POST['submit'])) {
             $connection->exec('COMMIT');
             include('terimaksih.php');
         }
-    } else {
     }
+} else {
+    echo "<script>window.location.href=('form.php');</script>";
 }
